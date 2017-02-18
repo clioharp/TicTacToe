@@ -40,10 +40,14 @@ def play_game():
             continue
         # Before we do another iteration, let us see if we can still place another piece
         gameboard.check_stalemate()
+        gameboard.switch_player_turn()
 
     gameboard.print_board()
-    if not gameboard.game_winner == 0:
-        print("The winner is player {}!!!".format(player_number))
+    gameboard.switch_player_turn()
+    if gameboard.game_winner == 1:
+        print("The winner is ❌ !!!")
+    elif gameboard.game_winner == 2:
+        print("The winner is ⭕️  !!!")
     else:
         print("Its a draw!")
 
