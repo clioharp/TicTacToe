@@ -8,7 +8,7 @@ class GameBoard:
     pieces_placed = 0
     game_over = False
     game_winner = 0
-    player_turn = True
+    player_turn = False
     player_1_winning_set = [
         # horizontal winning sets
         [Square(0, 0), Square(1, 0), Square(2, 0)],
