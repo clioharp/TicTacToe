@@ -17,3 +17,5 @@ class Square:
             cls.y = int(y_coord)
         except ValueError:
             raise ValueError('Input should be of form: x,y')
+
+        return cls
