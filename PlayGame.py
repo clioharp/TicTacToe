@@ -1,5 +1,4 @@
 from GameBoard import GameBoard
-import click
 from Square import Square
 
 
@@ -10,18 +9,12 @@ class printColors:
     ENDC = '\033[0m'
 
 
-@click.group()
-def game():
-    pass
-
-
 def play_game():
 
     print('Welcome to my game!\nWhen it is your turn, please enter the square you\'d like to occupy with no spaces, '
           'indexes are from the top left corner')
     gameboard = GameBoard()
     while not gameboard.game_over:
-        gameboard.switch_player_turn()
         gameboard.print_board()
         if not gameboard.player_turn:
             print('❌ , it is your turn')
