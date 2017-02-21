@@ -8,7 +8,7 @@ class GameBoard:
     pieces_placed = 0
     game_over = False
     game_winner = 0
-    player_turn = False
+    player_turn = 1
     player_1_winning_set = [
         # horizontal winning sets
         [Square(0, 0), Square(1, 0), Square(2, 0)],
@@ -36,12 +36,13 @@ class GameBoard:
         [Square(2, 0), Square(1, 1), Square(0, 2)]
     ]
 
-    def place_piece(self, square, player_number):
+    def place_piece(self, square):
         self.check_valid_move(square)
-        self.board[square.x][square.y] = player_number
+        self.board[square.x][square.y] = self.player_turn
         self.check_game_won(square)
         # Keep track of how many pieces have been placed so we can terminate if needed
         self.pieces_placed += 1
+        self.switch_player_turn()
 
     def check_valid_move(self, square):
         if square.x > self.w-1 or square.y > self.h-1:
@@ -50,7 +51,10 @@ class GameBoard:
             raise(ValueError('The square is already occupied by another piece.'))
 
     def switch_player_turn(self):
-        self.player_turn = not self.player_turn
+        if self.player_turn == 1:
+            self.player_turn = 2
+        else:
+            self.player_turn = 1
 
     def print_board(self):
         for y in range(self.h):
@@ -67,7 +71,7 @@ class GameBoard:
         print()
 
     def check_game_won(self, square):
-        if not self.player_turn:
+        if self.player_turn == 1:
             relevant_list = self.player_1_winning_set
         else:
             relevant_list = self.player_2_winning_set
@@ -82,7 +86,7 @@ class GameBoard:
 
     def set_winner(self):
         self.game_over = True
-        if not self.player_turn:
+        if self.player_turn == 1:
             self.game_winner = 1
         else:
             self.game_winner = 2

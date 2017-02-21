@@ -16,7 +16,7 @@ def play_game():
     gameboard = GameBoard()
     while not gameboard.game_over:
         gameboard.print_board()
-        if not gameboard.player_turn:
+        if gameboard.player_turn == 1:
             print('❌ , it is your turn')
         else:
             print('⭕️ , it is your turn')
@@ -28,22 +28,16 @@ def play_game():
             print(printColors.FAIL + '\n{}\n'.format(str(e)) + printColors.ENDC)
             continue
 
-        if not gameboard.player_turn:
-            player_number = 1
-        else:
-            player_number = 2
         # Try to place the piece; if not valid move, error will return up call stack
         try:
-            gameboard.place_piece(selected_square, player_number)
+            gameboard.place_piece(selected_square)
         except ValueError as e:
             print(printColors.FAIL + '\n{}\n'.format(e) + printColors.ENDC)
             continue
         # Before we do another iteration, let us see if we can still place another piece
         gameboard.check_stalemate()
-        gameboard.switch_player_turn()
 
     gameboard.print_board()
-    gameboard.switch_player_turn()
     if gameboard.game_winner == 1:
         print("The winner is ❌ !!!")
     elif gameboard.game_winner == 2:
