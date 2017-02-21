@@ -11,6 +11,9 @@ class Square:
             raise(ValueError('Input should be of form: x,y'))
         x_coord = input_string[0]
         y_coord = input_string[2]
+        comma = input_string[1]
+        if not comma == ',':
+            raise(ValueError('Input should be of form: x,y'))
 
         try:
             cls.x = int(x_coord)
